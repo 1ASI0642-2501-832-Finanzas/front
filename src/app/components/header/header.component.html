@@ -1,0 +1,33 @@
+<c-header position="sticky" class="mb-4">
+  <c-container fluid class="d-flex align-items-center justify-content-between">
+
+    <!-- Logo o Nombre -->
+    <c-header-brand [routerLink]="['/home']" class="fs-4 fw-bold">MyApp</c-header-brand>
+
+    <!-- Navegación -->
+    <c-header-nav class="ms-auto d-flex align-items-center">
+
+      <!-- Dropdown Placeholder (Ahora a la izquierda de "Sign In") -->
+    <c-dropdown alignment="end">
+      <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Dropdown</a>
+      <ul cDropdownMenu>
+        <li><a routerLink="/" cDropdownItem>Action</a></li>
+        <li><a routerLink="/" cDropdownItem>Another action</a></li>
+        <li><hr cDropdownDivider></li>
+        <li><a routerLink="/" cDropdownItem>Something else</a></li>
+      </ul>
+    </c-dropdown>
+
+      <!-- Sign In -->
+      <c-nav-item class="me-3">
+        <a cNavLink routerLink="/login">Sign In</a>
+      </c-nav-item>
+
+      <!-- Botón Get Started -->
+      <c-nav-item>
+        <button cButton color="dark" size="" routerLink="/register">Get Started</button>
+      </c-nav-item>
+
+    </c-header-nav>
+  </c-container>
+</c-header>

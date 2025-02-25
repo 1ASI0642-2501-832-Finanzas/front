@@ -16,6 +16,7 @@ import {MatInput, MatInputModule} from '@angular/material/input';
 import {MatButton, MatButtonModule} from '@angular/material/button';
 import {MatCheckbox} from '@angular/material/checkbox';
 import { RegisterComponent } from './register/register.component';
+import {ButtonDirective, FormCheckComponent} from '@coreui/angular';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { RegisterComponent } from './register/register.component';
     MatCardContent,
     MatCardSubtitle,
     MatCardHeader,
-    MatCheckbox
+    MatCheckbox,
+    FormCheckComponent,
+    ButtonDirective
   ],
   exports: [
     LoginComponent

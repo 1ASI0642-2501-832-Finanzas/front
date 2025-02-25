@@ -1,0 +1,9 @@
+a {
+  color: #6c757d !important; /* Gris Bootstrap */
+  text-decoration: none;
+}
+
+a:hover {
+  color: black !important; /* Un gris más oscuro al pasar el cursor */
+  text-decoration: underline;
+}
