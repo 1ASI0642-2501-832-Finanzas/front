@@ -20,10 +20,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    DashboardModule,
-    HttpClientModule
+    DashboardModule
   ],
   providers: [
+    provi
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
