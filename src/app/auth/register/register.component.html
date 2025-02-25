@@ -1,0 +1,31 @@
+<div class="register-container">
+  <div class="register-box">
+    <div class="register-header">
+      <h2>Create an Account</h2>
+      <p>Sign up to get started</p>
+    </div>
+
+    <form (submit)="register()">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="user.username" name="username" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="user.email" name="email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="user.password" name="password" required>
+      </mat-form-field>
+
+      <p>Already have an account? <a routerLink="/login">Sign In</a></p>
+
+      <button mat-raised-button color="primary" class="register-button" type="submit">
+        Sign Up
+      </button>
+    </form>
+  </div>
+</div>

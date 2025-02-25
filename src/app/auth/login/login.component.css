@@ -1,0 +1,80 @@
+/* Fondo con color sólido */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f7fc; /* Azul grisáceo claro */
+}
+
+/* Caja de login */
+.login-box {
+  width: 350px;
+  padding: 30px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Encabezado */
+.login-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.login-header p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Estilos de los campos de entrada */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Botón */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+}
+
+/* Opciones: remember me + forgot password */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Enlace de forgot password */
+.forgot-password {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+p a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
