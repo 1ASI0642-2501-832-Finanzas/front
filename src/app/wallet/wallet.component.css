@@ -1,0 +1,23 @@
+.wallet-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.wallet-card {
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+}
+
+.wallet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.wallet-table {
+  width: 100%;
+}
