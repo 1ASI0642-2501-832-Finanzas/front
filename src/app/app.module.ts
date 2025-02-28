@@ -19,6 +19,10 @@ import {
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import {HomeComponent} from './components/home/home.component';
+
+
+
 
 
 @NgModule({
@@ -26,7 +30,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HomeComponent,
+
   ],
   imports: [
     BrowserModule,
