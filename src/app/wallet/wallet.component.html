@@ -1,0 +1,40 @@
+<div class="wallet-container">
+  <mat-card class="wallet-card">
+    <div class="wallet-header">
+      <h2>Carteras</h2>
+      <button mat-raised-button color="primary" (click)="openWalletDialog()">Agregar</button>
+    </div>
+
+    <mat-table [dataSource]="wallets" class="wallet-table">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let wallet"> {{ wallet.name }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
+        <mat-cell *matCellDef="let wallet"> {{ wallet.description }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tcea">
+        <mat-header-cell *matHeaderCellDef> TCEA </mat-header-cell>
+        <mat-cell *matCellDef="let wallet"> {{ wallet.tcea }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let wallet">
+          <button mat-icon-button color="accent" (click)="openWalletDialog(wallet)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteWallet(wallet.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['name', 'description', 'tcea', 'actions']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'description', 'tcea', 'actions'];"></mat-row>
+    </mat-table>
+  </mat-card>
+</div>

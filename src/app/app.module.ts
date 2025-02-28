@@ -1,32 +1,59 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { DashboardModule } from './dashboard/dashboard.module';
 import {
   ButtonDirective,
   ContainerComponent,
-  DropdownComponent, DropdownDividerDirective, DropdownItemDirective, DropdownMenuDirective, DropdownToggleDirective,
+  DropdownComponent, DropdownItemDirective, DropdownMenuDirective,
+  DropdownToggleDirective,
   FooterModule,
   HeaderModule,
-  NavItemComponent,
-  NavLinkDirective
+  NavItemComponent, NavLinkDirective
 } from '@coreui/angular';
-import {HeaderComponent} from './components/header/header.component';
-import {FooterComponent} from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-
+import {WalletComponent} from './wallet/wallet.component';
+import {WalletDialogComponent} from './wallet/wallet-dialog/wallet-dialog.component';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from '@angular/material/datepicker';
+import {MatFormField, MatInput, MatInputModule, MatSuffix} from '@angular/material/input';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatDialogActions, MatDialogContent, MatDialogModule, MatDialogTitle} from '@angular/material/dialog';
+import {MatCard} from '@angular/material/card';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable
+} from '@angular/material/table';
+import {MatIcon} from '@angular/material/icon';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    WalletComponent,
+    WalletDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,19 +62,50 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     DashboardModule,
     FooterModule,
     HeaderModule,
-    ContainerComponent,
+    CommonModule,
+    ReactiveFormsModule,
     NavItemComponent,
-    NavLinkDirective,
     DropdownComponent,
-    DropdownDividerDirective,
-    DropdownMenuDirective,
+    ContainerComponent,
     DropdownToggleDirective,
+    NavLinkDirective,
+    DropdownMenuDirective,
     DropdownItemDirective,
-    ButtonDirective
+    ButtonDirective,
+    MatDatepickerInput,
+    MatInput,
+    MatSuffix,
+    MatFormField,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatButton,
+    MatDialogActions,
+    MatDialogContent,
+    MatDialogTitle,
+    MatCard,
+    MatTable,
+    MatHeaderCell,
+    MatCell,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatIconButton,
+    MatIcon,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatHeaderRowDef,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatInputModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
