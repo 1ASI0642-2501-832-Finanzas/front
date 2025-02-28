@@ -1,0 +1,763 @@
+/* Sección de Introducción */
+.intro {
+  height: 80vh;
+  background: url('https://images.pexels.com/photos/6694950/pexels-photo-6694950.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10%;
+  color: white;
+  position: relative;
+}
+
+/* Capa de oscurecimiento */
+.intro::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: saturate(1.5);
+  background: rgba(0, 0, 0, 0.65);
+}
+
+/* Contenedor del contenido */
+.intro-content {
+  position: relative;
+  z-index: 2;
+  max-width: 550px;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+/* Título impactante */
+.intro-content h1 {
+  font-size: 3.2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+/* Resaltar palabras clave */
+.highlight {
+  color: rgb(133, 204, 106);
+}
+
+/* Párrafo */
+.intro-content p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+/* Botones */
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+/* Botón principal */
+.primary-btn {
+  font-size: 1.2em;
+  padding: 12px 25px;
+  border-radius: 20px;
+  background: rgb(133, 204, 106);
+  color: white;
+  transition: 0.3s ease;
+}
+
+/* Botón secundario */
+.secondary-btn {
+  font-size: 1.2em;
+  padding: 12px 25px;
+  border-radius: 20px;
+  color: white;
+  background: rgba(133, 204, 106, 0.09);
+  border: 2px solid rgba(133, 204, 106, 0.32);
+  transition: 0.3s ease;
+}
+
+/* Efectos Hover */
+.primary-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(133, 204, 106, 0.4);
+}
+
+.secondary-btn:hover {
+  background: rgba(182, 195, 179, 0.71);
+
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .intro {
+    justify-content: center;
+    text-align: center;
+    padding: 0 5%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+/* Sección de Características */
+.features {
+  text-align: center;
+  padding: 60px 10%;
+}
+
+/* Subtítulo en color verde */
+.features-subtitle {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(133, 204, 106);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+/* Título Principal */
+.features-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 40px;
+}
+
+/* Contenedor de Características */
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas por defecto */
+  gap: 100px;
+  text-align: left;
+  align-items: start;
+}
+
+/* Estilo de cada ítem */
+.feature-item {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Efecto hover */
+.feature-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Iconos Principales */
+.feature-icon {
+  font-size: 40px;
+  color: rgb(133, 204, 106);
+  margin-bottom: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+/* Títulos de cada característica */
+.feature-item h3 {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Descripción */
+.feature-item p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Lista de Beneficios */
+.feature-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Estilo de los ítems de la lista */
+.feature-item li {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  color: #444;
+  margin: 5px 0;
+}
+
+/* Ícono de check estilizado */
+.check-icon {
+  font-size: 18px;
+  color: rgb(133, 204, 106);
+  margin-right: 8px;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* En pantallas medianas (tablets), se ajusta a 2 columnas */
+@media (max-width: 900px) {
+  .features-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+  }
+}
+
+/* En pantallas pequeñas (móviles), se ajusta a 1 columna */
+@media (max-width: 600px) {
+  .features-container {
+    grid-template-columns: 1fr; /* 1 columna en móviles */
+    gap: 20px; /* Reducir espacio entre elementos */
+  }
+
+  .features-title {
+    font-size: 1.8em; /* Ajustar tamaño del título en móviles */
+  }
+
+  .feature-item {
+    padding: 15px; /* Reducir padding para optimizar espacio */
+  }
+}
+
+
+
+/* Sección de Funciones Principales */
+.functions {
+  text-align: center;
+  padding: 60px 10%;
+  background: #f8f9fa; /* Fondo gris claro */
+}
+
+/* Subtítulo en color verde */
+.functions-subtitle {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(133, 204, 106);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+/* Título Principal */
+.functions-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 50px;
+}
+
+/* Contenedor de Funciones */
+.functions-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+  gap: 50px;
+  text-align: left;
+  justify-items: center;
+}
+
+/* Estilo de cada función */
+.function-item {
+  max-width: 320px;
+}
+
+/* Contenedor del icono y texto alineado */
+.function-content {
+  display: flex;
+  align-items: flex-start; /* Asegura que el icono y el texto estén alineados arriba */
+  gap: 15px;
+}
+
+/* Iconos de funciones alineados a la izquierda */
+.function-icon {
+  font-size: 40px;
+  color: rgb(133, 204, 106);
+  margin-top: 30px;
+  width: auto;
+  height: auto;
+}
+
+/* Contenedor del texto */
+.function-text {
+  flex: 1;
+}
+
+/* Títulos de cada función */
+.function-text h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Descripción */
+.function-text p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.4;
+  margin: 3px 0;
+}
+
+/* Responsive: Adaptar a pantallas pequeñas */
+@media (max-width: 900px) {
+  .functions-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+  }
+}
+
+@media (max-width: 600px) {
+  .functions-container {
+    grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
+  }
+}
+
+/* Sección de Equipo */
+
+.team {
+  text-align: center;
+  padding: 50px 10%;
+  background: #f8f9fa; /* Fondo gris claro */
+}
+
+/* Subtítulo */
+.team-subtitle {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(133, 204, 106);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+/* Título principal */
+.team-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 40px;
+}
+
+/* Contenedor del equipo */
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+  gap: 40px;
+  text-align: center;
+  justify-items: center;
+}
+
+/* Estilo de cada miembro */
+.team-member {
+  max-width: 240px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 15px;
+  transition: 0.3s ease;
+}
+
+/* Hover */
+.team-member:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Foto de perfil */
+.team-member img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 4px solid #f8f9fa;
+}
+
+/* Nombre */
+.team-member h3 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Rol */
+.team-member .role {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Descripción */
+.team-member p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* En pantallas medianas (tablets), se ajusta a 2 columnas */
+@media (max-width: 1100px) {
+  .team-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* En pantallas pequeñas (móviles), se ajusta a 1 columna */
+@media (max-width: 768px) {
+  .team-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .team-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+/* Sección About Us */
+.about-us {
+  padding: 120px 10%;
+  background: #f8f9fa; /* Fondo gris claro */
+}
+
+/* Contenedor principal */
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* Imagen con etiqueta de experiencia */
+.about-image {
+  position: relative;
+  width: 50%;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 10px;
+  right: 30px;
+}
+
+/* Etiqueta de experiencia */
+.experience-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgb(0, 0, 0);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+.experience-badge strong {
+  font-size: 1.6em;
+}
+
+/* Contenido textual */
+.about-content {
+  width: 50%;
+}
+
+/* Subtítulo */
+.about-subtitle {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(133, 204, 106);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+/* Título */
+.about-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+/* Párrafo */
+.about-content p {
+  font-size: 1.1em;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+
+}
+
+/* Botón */
+.about-btn {
+  font-size: 1.2em;
+  padding: 12px 25px;
+  border-radius: 25px;
+  background: rgb(133, 204, 106);
+  color: white;
+  border: none;
+  transition: 0.3s ease;
+}
+
+.about-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(133, 204, 106, 0.4);
+}
+
+/* RESPONSIVE */
+
+/* En pantallas medianas, se ajusta en columnas */
+@media (max-width: 900px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-image, .about-content {
+    width: 100%;
+  }
+}
+
+
+/* Sección de Testimonios */
+.testimonials {
+  text-align: center;
+  padding: 80px 10%;
+}
+
+/* Subtítulo */
+.testimonials-subtitle {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(133, 204, 106);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+/* Título */
+.testimonials-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 40px;
+}
+
+/* Contenedor del Testimonio */
+.testimonial-container {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tarjeta de Testimonio */
+.testimonial-card {
+  position: absolute;
+  background: transparent;
+  text-align: center;
+  max-width: 700px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Testimonio Activo */
+.testimonial-card.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Texto del testimonio */
+.testimonial-text {
+  font-size: 1.3em;
+  font-style: italic;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Contenedor del usuario */
+.testimonial-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Imagen del usuario */
+.testimonial-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* Nombre del usuario */
+.testimonial-name {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+/* Puntos de navegación */
+.testimonial-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Puntos */
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.active-dot {
+  background: rgb(133, 204, 106);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .testimonials {
+    padding: 60px 5%;
+  }
+}
+
+
+/* Sección de Contacto */
+.contact-section {
+  padding: 60px 10%;
+  background-color: #f8f9fa; /* Color de fondo gris claro */
+}
+
+/* Contenedor Principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estructura del contenido */
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Lado Izquierdo */
+.contact-left {
+  flex: 1;
+  text-align: left;
+}
+
+/* Título */
+.contact-left h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgb(133, 204, 106);
+  margin-bottom: 15px;
+}
+
+/* Descripción */
+.contact-left p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Formulario */
+#contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Fila de Inputs */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+/* Inputs */
+.form-row input,
+#message {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Textarea */
+#message {
+  height: 120px;
+}
+
+/* Botón */
+.btn-submit {
+  background-color: rgb(133, 204, 106);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.btn-submit:hover {
+  background-color: rgba(85, 227, 32, 0.83);
+}
+
+/* Lado Derecho */
+.contact-right {
+  flex: 1;
+  text-align: right;
+}
+
+/* Mapa Responsivo */
+.contact-right iframe {
+  max-width: 100%;
+  border-radius: 10px;
+  height: 450px;
+
+}
+
+/* Responsividad */
+@media (max-width: 900px) {
+  .contact-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+
+

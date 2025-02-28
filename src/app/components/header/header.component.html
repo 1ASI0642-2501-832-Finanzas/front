@@ -7,25 +7,40 @@
     <!-- Navegación -->
     <c-header-nav class="ms-auto d-flex align-items-center">
 
-      <!-- Dropdown Placeholder (Ahora a la izquierda de "Sign In") -->
-    <c-dropdown alignment="end">
-      <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Dropdown</a>
-      <ul cDropdownMenu>
-        <li><a routerLink="/" cDropdownItem>Action</a></li>
-        <li><a routerLink="/" cDropdownItem>Another action</a></li>
-        <li><hr cDropdownDivider></li>
-        <li><a routerLink="/" cDropdownItem>Something else</a></li>
-      </ul>
-    </c-dropdown>
+      <!-- Dropdown NO Autenticado -->
+      <c-dropdown *ngIf="!authService.isAuthenticated()" alignment="end">
+        <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Explore</a>
+        <ul cDropdownMenu>
+          <li><a routerLink="/about" cDropdownItem>About Us</a></li>
+          <li><a routerLink="/services" cDropdownItem>Services</a></li>
+          <li><a routerLink="/contact" cDropdownItem>Contact</a></li>
+        </ul>
+      </c-dropdown>
 
-      <!-- Sign In -->
+      <!-- Dropdown Autenticado -->
+      <c-dropdown *ngIf="authService.isAuthenticated()" alignment="end">
+        <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Dashboard</a>
+        <ul cDropdownMenu>
+          <li><a routerLink="/wallet" cDropdownItem>Gestion de Carteras</a></li>
+          <li><a routerLink="/settings" cDropdownItem>Settings</a></li>
+          <li><a routerLink="/reports" cDropdownItem>Reports</a></li>
+        </ul>
+      </c-dropdown>
+
+      <!-- Sign In / Profile -->
       <c-nav-item class="me-3">
-        <a cNavLink routerLink="/login">Sign In</a>
+        <a *ngIf="!authService.isAuthenticated()" cNavLink routerLink="/login">Sign In</a>
+        <a *ngIf="authService.isAuthenticated()" cNavLink routerLink="/dashboard">Dashboard</a>
       </c-nav-item>
 
-      <!-- Botón Get Started -->
+      <!-- Botón Get Started / Log Out -->
       <c-nav-item>
-        <button cButton color="dark" size="" routerLink="/register">Get Started</button>
+        <button *ngIf="!authService.isAuthenticated()" cButton color="dark" routerLink="/register">
+          Get Started
+        </button>
+        <button *ngIf="authService.isAuthenticated()" cButton color="danger" (click)="logout()">
+          Log Out
+        </button>
       </c-nav-item>
 
     </c-header-nav>

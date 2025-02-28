@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Agregar Cartera</h2>
+
+<mat-dialog-content class="dialog-content">
+  <form [formGroup]="walletForm">
+
+    <!-- Campo Nombre -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" required>
+    </mat-form-field>
+
+    <!-- Campo Descripción -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="description" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Selecciona una fecha</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="discountDate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<!-- Acciones del Modal -->
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Guardar</button>
+</mat-dialog-actions>

@@ -1,0 +1,21 @@
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaciado entre los campos */
+}
+
+.full-width {
+  width: 100%;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
