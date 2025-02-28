@@ -7,6 +7,7 @@ import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { DashboardModule } from './dashboard/dashboard.module';
+
 import {
   ButtonDirective,
   ContainerComponent,
@@ -19,6 +20,9 @@ import {
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/home/home.component';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton} from '@angular/material/button';
 
 
 @NgModule({
@@ -26,7 +30,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     DropdownMenuDirective,
     DropdownToggleDirective,
     DropdownItemDirective,
-    ButtonDirective
+    ButtonDirective,
+    MatIcon,
+    MatButton
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
