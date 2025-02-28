@@ -30,7 +30,7 @@
       <!-- Sign In / Profile -->
       <c-nav-item class="me-3">
         <a *ngIf="!authService.isAuthenticated()" cNavLink routerLink="/login">Sign In</a>
-        <a *ngIf="authService.isAuthenticated()" cNavLink routerLink="/profile">Profile</a>
+        <a *ngIf="authService.isAuthenticated()" cNavLink routerLink="/dashboard">Dashboard</a>
       </c-nav-item>
 
       <!-- Botón Get Started / Log Out -->
