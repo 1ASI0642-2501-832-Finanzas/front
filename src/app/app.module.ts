@@ -7,6 +7,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { DashboardModule } from './dashboard/dashboard.module';
+
 import {
   ButtonDirective,
   ContainerComponent,
@@ -45,6 +46,7 @@ import {
 import {MatIcon} from '@angular/material/icon';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     PageNotFoundComponent,
     WalletComponent,
     WalletDialogComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
