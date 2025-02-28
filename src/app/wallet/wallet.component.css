@@ -1,9 +1,11 @@
 .wallet-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Asegura que el contenido comience arriba */
   padding: 20px;
+
 }
+
 
 .wallet-card {
   max-width: 900px;
