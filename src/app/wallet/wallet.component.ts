@@ -4,8 +4,7 @@ import { WalletService } from '../services/wallet.service';
 import { AuthService } from '../auth/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { WalletDialogComponent } from './wallet-dialog/wallet-dialog.component';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-wallet',
@@ -19,11 +18,12 @@ export class WalletComponent {
   constructor(
     private walletService: WalletService,
     private authService: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getWallets(); // Inicializamos la lista de wallets
+    this.getWallets();
   }
 
   getWallets(): void {
@@ -48,21 +48,24 @@ export class WalletComponent {
     }
 
     this.walletService.deleteWallet(walletId).subscribe({
-      next: () => this.getWallets(), // Recargamos la lista de wallets
+      next: () => {
+        console.log(`✅ Cartera con ID ${walletId} eliminada con éxito`);
+        this.getWallets(); // Recargamos la lista de wallets
+      },
       error: (err) => console.error('Error al eliminar la cartera:', err)
     });
   }
 
-  openWalletDialog(wallet: Wallet | null = null): void {
+  openWalletDialog(): void {
     const dialogRef = this.dialog.open(WalletDialogComponent, {
       width: '400px',
       disableClose: true,
-      data: wallet || {} // Si no hay wallet, se envía un objeto vacío para crear una nueva
+      data: {} // Enviamos un objeto vacío porque es una nueva cartera
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.saveWallet(result); // Llamamos a saveWallet para crear o actualizar
+        this.saveWallet(result); // Guardar la cartera cuando el modal se cierre
       }
     });
   }
@@ -71,36 +74,29 @@ export class WalletComponent {
     const userIdentifier = this.authService.getUserIdentifier();
 
     if (!userIdentifier) {
-      console.error('❌ No hay usuario autenticado');
+      console.error('No hay usuario autenticado');
       this.authService.logout();
       return;
     }
 
-    // Decidimos si hacer una creación o actualización según si wallet tiene id
-    let request: Observable<Wallet>;
-
-    if (wallet.id) {
-      // Si la wallet tiene un id, se actualiza
-      request = this.walletService.updateWallet(wallet).pipe(map(() => wallet));
-    } else {
-      // Si no tiene id, se crea una nueva wallet
-      request = this.walletService.createWallet(wallet, userIdentifier);
-    }
-
-    console.log('📤 Verificando request antes de suscribirse:', request);
-
-    if (!request || typeof request.subscribe !== 'function') {
-      console.error('❌ Error: request no es un Observable.', request);
-      return;
-    }
-
-    // Realizamos la suscripción al request (creación o actualización)
-    request.subscribe({
+    this.walletService.createWallet(wallet, userIdentifier).subscribe({
       next: () => {
-        console.log(`✅ Cartera ${wallet.id ? 'actualizada' : 'creada'} con éxito`);
-        this.getWallets(); // Recargamos la lista de wallets después de la operación
+        console.log('✅ Cartera creada con éxito');
+        this.getWallets(); // Recargamos la lista de wallets después de la creación
       },
-      error: (err: any) => console.error(`❌ Error al ${wallet.id ? 'actualizar' : 'crear'} la cartera:`, err)
+      error: (err: any) => console.error('Error al crear la cartera:', err)
     });
+  }
+
+  goToInvoice(walletId: number): void {
+    this.router.navigate([`wallet/${walletId}/invoice`])
+      .then(success => {
+        if (success) {
+          console.log(`Navegación exitosa a wallet/${walletId}/invoice`);
+        } else {
+          console.error(`Error al navegar a wallet/${walletId}/invoice`);
+        }
+      })
+      .catch(error => console.error('Error de navegacion:', error));
   }
 }
