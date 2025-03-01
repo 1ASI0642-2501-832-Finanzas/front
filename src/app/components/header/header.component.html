@@ -19,7 +19,7 @@
 
       <!-- Dropdown Autenticado -->
       <c-dropdown *ngIf="authService.isAuthenticated()" alignment="end">
-        <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Dashboard</a>
+        <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Opciones</a>
         <ul cDropdownMenu>
           <li><a routerLink="/wallet" cDropdownItem>Gestion de Carteras</a></li>
           <li><a routerLink="/settings" cDropdownItem>Settings</a></li>

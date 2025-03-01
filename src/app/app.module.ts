@@ -48,6 +48,7 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceDialogComponent } from './invoice/invoice-dialog/invoice-dialog.component';
 
 @NgModule({
   declarations: [
