@@ -2,6 +2,6 @@ export interface Wallet {
   id?: number;
   name: string;
   description: string;
-  discountDate: Date;
+  discountDate: string;
   userIdentifier: string;
 }
