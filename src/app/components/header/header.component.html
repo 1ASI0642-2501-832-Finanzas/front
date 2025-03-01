@@ -11,15 +11,15 @@
       <c-dropdown *ngIf="!authService.isAuthenticated()" alignment="end">
         <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Explore</a>
         <ul cDropdownMenu>
-          <li><a routerLink="/about" cDropdownItem>About Us</a></li>
-          <li><a routerLink="/services" cDropdownItem>Services</a></li>
-          <li><a routerLink="/contact" cDropdownItem>Contact</a></li>
+          <li><a [routerLink]="['/home']" [fragment]="'about'" cDropdownItem>About Us</a></li>
+          <li><a  [routerLink]="['/home']" [fragment]="'service'" cDropdownItem>Services</a></li>
+          <li><a [routerLink]="['/home']" [fragment]="'contact'" cDropdownItem>Contact</a></li>
         </ul>
       </c-dropdown>
 
       <!-- Dropdown Autenticado -->
       <c-dropdown *ngIf="authService.isAuthenticated()" alignment="end">
-        <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Dashboard</a>
+        <a cDropdownToggle cNavLink href="#" (click)="$event.preventDefault()">Opciones</a>
         <ul cDropdownMenu>
           <li><a routerLink="/wallet" cDropdownItem>Gestion de Carteras</a></li>
           <li><a routerLink="/settings" cDropdownItem>Settings</a></li>

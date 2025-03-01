@@ -1,24 +1,23 @@
-.wallet-container {
+.invoice-container {
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Asegura que el contenido comience arriba */
   padding: 20px;
-
 }
 
-.wallet-card {
+.invoice-card {
   max-width: 1200px; /* Aumenta el ancho de la tarjeta */
   width: 100%;
   padding: 20px;
 }
 
-.wallet-header {
+.invoice-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.wallet-table {
+.invoice-table {
   width: 100%;
 }
