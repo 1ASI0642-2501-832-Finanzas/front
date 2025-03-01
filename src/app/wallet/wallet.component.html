@@ -6,26 +6,36 @@
     </div>
 
     <mat-table [dataSource]="wallets" class="wallet-table">
+      <!-- Columna: Nombre -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
         <mat-cell *matCellDef="let wallet"> {{ wallet.name }} </mat-cell>
       </ng-container>
 
+      <!-- Columna: Descripción -->
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
         <mat-cell *matCellDef="let wallet"> {{ wallet.description }} </mat-cell>
       </ng-container>
 
+      <!-- Columna: Fecha de Descuento -->
+      <ng-container matColumnDef="discountDate">
+        <mat-header-cell *matHeaderCellDef> Fecha de Descuento </mat-header-cell>
+        <mat-cell *matCellDef="let wallet"> {{ wallet.discountDate | date: 'yyyy/MM/dd' }} </mat-cell>
+      </ng-container>
+
+      <!-- Columna: TCEA -->
       <ng-container matColumnDef="tcea">
         <mat-header-cell *matHeaderCellDef> TCEA </mat-header-cell>
         <mat-cell *matCellDef="let wallet"> {{ wallet.tcea }} </mat-cell>
       </ng-container>
 
+      <!-- Columna: Acciones -->
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
         <mat-cell *matCellDef="let wallet">
-          <button mat-icon-button color="accent" (click)="openWalletDialog(wallet)">
-            <mat-icon>edit</mat-icon>
+          <button mat-icon-button color="primary" (click)="goToInvoice(wallet.id)">
+            <mat-icon>visibility</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="deleteWallet(wallet.id)">
             <mat-icon>delete</mat-icon>
@@ -33,8 +43,8 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="['name', 'description', 'tcea', 'actions']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['name', 'description', 'tcea', 'actions'];"></mat-row>
+      <mat-header-row *matHeaderRowDef="['name', 'description', 'discountDate', 'tcea', 'actions']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'description', 'discountDate', 'tcea', 'actions'];"></mat-row>
     </mat-table>
   </mat-card>
 </div>

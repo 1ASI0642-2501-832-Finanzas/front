@@ -7,11 +7,13 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {WalletComponent} from './wallet/wallet.component';
 import {HomeComponent} from './components/home/home.component';
+import {InvoiceComponent} from './invoice/invoice.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
+  { path: 'wallet/:walletId/invoice', component: InvoiceComponent, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

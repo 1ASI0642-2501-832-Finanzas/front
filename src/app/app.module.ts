@@ -47,6 +47,7 @@ import {MatIcon} from '@angular/material/icon';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { HomeComponent } from './components/home/home.component';
     PageNotFoundComponent,
     WalletComponent,
     WalletDialogComponent,
-    HomeComponent
+    HomeComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,
