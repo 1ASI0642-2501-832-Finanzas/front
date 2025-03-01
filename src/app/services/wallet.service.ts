@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Wallet } from '../models/wallet';
-import { AuthService } from '../auth/auth.service';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,43 +10,31 @@ import { environment } from '../../environments/environment';
 export class WalletService {
   private apiUrl = environment.apiUrl; // URL base del backend
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
-
-  private getAuthHeaders(): HttpHeaders {
-    const token = this.authService.getToken();
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   getWallets(userIdentifier: string): Observable<Wallet[]> {
-    return this.http.get<Wallet[]>(`${this.apiUrl}/wallet/users/${userIdentifier}`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get<Wallet[]>(`${this.apiUrl}/wallet/users/${userIdentifier}`);
   }
 
   getWalletById(id: number): Observable<Wallet> {
-    return this.http.get<Wallet>(`${this.apiUrl}/wallet/${id}`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get<Wallet>(`${this.apiUrl}/wallet/${id}`);
   }
 
   createWallet(wallet: Omit<Wallet, 'id'>, userIdentifier: string): Observable<Wallet> {
-    return this.http.post<Wallet>(`${this.apiUrl}/wallet`, { ...wallet, userIdentifier }, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.post<Wallet>(`${this.apiUrl}/wallet`, { ...wallet, userIdentifier });
   }
 
   deleteWallet(walletId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/wallet/${walletId}`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.delete<void>(`${this.apiUrl}/wallet/${walletId}`);
   }
 
-  updateWallet(wallet: Wallet): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/wallet/${wallet.id}`, wallet, {
-      headers: this.getAuthHeaders()
+  /**
+   * Genera un reporte PDF para una billetera
+   * @param walletId ID de la billetera
+   */
+  generateWalletReport(walletId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/wallet/${walletId}/report`, {
+      responseType: 'blob' // Recibe el archivo en formato Blob
     });
   }
 }
