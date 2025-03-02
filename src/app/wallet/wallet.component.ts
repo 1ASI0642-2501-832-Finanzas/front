@@ -99,4 +99,24 @@ export class WalletComponent {
       })
       .catch(error => console.error('Error de navegacion:', error));
   }
+
+  downloadReport(walletId: number): void {
+    this.walletService.generateWalletReport(walletId).subscribe({
+      next: (response) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `reporte_wallet_${walletId}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        console.log(`📥 Reporte descargado: reporte_wallet_${walletId}.pdf`);
+      },
+      error: (err) => {
+        console.error('❌ Error al descargar el reporte:', err);
+      }
+    });
+  }
 }

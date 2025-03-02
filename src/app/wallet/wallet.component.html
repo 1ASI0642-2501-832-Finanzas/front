@@ -40,8 +40,12 @@
           <button mat-icon-button color="warn" (click)="deleteWallet(wallet.id)">
             <mat-icon>delete</mat-icon>
           </button>
+          <button mat-icon-button matTooltip="Descargar PDF" (click)="downloadReport(wallet.id)">
+            <mat-icon>picture_as_pdf</mat-icon>
+          </button>
         </mat-cell>
       </ng-container>
+
 
       <mat-header-row *matHeaderRowDef="['name', 'description', 'discountDate', 'tcea', 'actions']"></mat-header-row>
       <mat-row *matRowDef="let row; columns: ['name', 'description', 'discountDate', 'tcea', 'actions'];"></mat-row>

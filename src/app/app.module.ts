@@ -33,7 +33,7 @@ import {
 import {MatFormField, MatInput, MatInputModule, MatSuffix} from '@angular/material/input';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatDialogActions, MatDialogContent, MatDialogModule, MatDialogTitle} from '@angular/material/dialog';
-import {MatCard} from '@angular/material/card';
+import {MatCard, MatCardTitle} from '@angular/material/card';
 import {
   MatCell,
   MatCellDef,
@@ -44,11 +44,14 @@ import {
   MatTable
 } from '@angular/material/table';
 import {MatIcon} from '@angular/material/icon';
-import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule, MatOption} from '@angular/material/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceDialogComponent } from './invoice/invoice-dialog/invoice-dialog.component';
+import {MatSelect} from '@angular/material/select';
+import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle} from '@angular/material/expansion';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,8 @@ import { InvoiceDialogComponent } from './invoice/invoice-dialog/invoice-dialog.
     WalletComponent,
     WalletDialogComponent,
     HomeComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    InvoiceDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +110,14 @@ import { InvoiceDialogComponent } from './invoice/invoice-dialog/invoice-dialog.
     MatDatepickerModule,
     MatInputModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSelect,
+    MatOption,
+    MatCardTitle,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatAccordion,
+    MatTooltip
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

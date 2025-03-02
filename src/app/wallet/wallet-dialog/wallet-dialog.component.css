@@ -1,21 +1,35 @@
-.dialog-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+.invoice-dialog {
+  width: 90vw;
+  max-width: 900px;
 }
 
-.dialog-content {
+.form-row {
   display: flex;
-  flex-direction: column;
-  gap: 15px; /* Espaciado entre los campos */
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.full-width {
+.form-row mat-form-field {
+  flex: 1;
+  min-width: 280px;
+}
+
+/* Asegura que todos los inputs tengan el mismo tamaño */
+mat-form-field {
   width: 100%;
 }
 
+/* Alineación de los botones */
 .dialog-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 12px;
+  margin-top: 20px;
+}
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  margin-top: 12px;
 }
