@@ -13,7 +13,7 @@ export class InvoiceService {
   constructor(private http: HttpClient) {}
 
   getInvoicesByWallet(walletId: number): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(`${this.apiUrl}/invoice`);
+    return this.http.get<Invoice[]>(`${this.apiUrl}/invoice/all/${walletId}`);
   }
 
   getInvoiceById(id: number): Observable<Invoice> {
@@ -24,8 +24,8 @@ export class InvoiceService {
     return this.http.post<Invoice>(`${this.apiUrl}/invoice`, invoice);
   }
 
-  updateInvoice(id: number, invoice: Invoice): Observable<Invoice> {
-    return this.http.put<Invoice>(`${this.apiUrl}/invoice/${id}`, invoice);
+  updateInvoice(id: number, invoice: any): Observable<Invoice> {
+    return this.http.put<Invoice>(`${this.apiUrl}/invoices/${id}`, invoice);
   }
 
   deleteInvoice(id: number): Observable<void> {
