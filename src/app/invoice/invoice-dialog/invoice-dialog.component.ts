@@ -129,35 +129,33 @@ export class InvoiceDialogComponent implements OnInit {
 
   onSave(): void {
     if (this.invoiceForm.invalid) {
-      console.warn("⚠️ Formulario inválido. Revisa los campos.");
+      console.warn('⚠️ Formulario inválido:', this.invoiceForm.value);
       return;
     }
 
     const invoiceData = this.invoiceForm.getRawValue();
-    invoiceData.tcea = null; // El backend lo calculará
+    console.log('📤 Enviando datos:', invoiceData);
 
     if (this.data.invoice?.id) {
-      // Si existe un ID, actualizamos (PUT)
+      // Si existe ID, es una actualización (PUT)
       this.invoiceService.updateInvoice(this.data.invoice.id, invoiceData).subscribe({
         next: (response) => {
-          console.log("✅ Factura actualizada", response);
+          console.log('✅ Factura actualizada correctamente:', response);
           this.dialogRef.close(true);
         },
         error: (error) => {
-          console.error("❌ Error al actualizar la factura", error);
+          console.error('❌ Error al actualizar la factura:', error);
         }
       });
     } else {
-      // Si no hay ID, creamos una nueva factura (POST)
-      invoiceData.walletId = this.data.walletId; // Asegurar que se envíe el walletId
-
+      // Si no hay ID, es un nuevo registro (POST)
       this.invoiceService.createInvoice(invoiceData).subscribe({
         next: (response) => {
-          console.log("✅ Factura creada", response);
+          console.log('✅ Factura creada correctamente:', response);
           this.dialogRef.close(true);
         },
         error: (error) => {
-          console.error("❌ Error al crear la factura", error);
+          console.error('❌ Error al crear la factura:', error);
         }
       });
     }

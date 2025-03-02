@@ -51,6 +51,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceDialogComponent } from './invoice/invoice-dialog/invoice-dialog.component';
 import {MatSelect} from '@angular/material/select';
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle} from '@angular/material/expansion';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle} from '@angular/
     MatCardTitle,
     MatExpansionPanel,
     MatExpansionPanelTitle,
-    MatAccordion
+    MatAccordion,
+    MatTooltip
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
