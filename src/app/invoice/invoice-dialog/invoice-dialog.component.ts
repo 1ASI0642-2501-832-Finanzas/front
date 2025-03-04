@@ -13,6 +13,7 @@ import {InvoiceService} from '../../services/invoice.service';
 export class InvoiceDialogComponent implements OnInit {
   invoiceForm!: FormGroup;
   isEditMode: boolean = false;
+  isViewMode: boolean = false;
 
   // Opciones de dropdowns
   invoiceTypes: string[] = ['Factura', 'Letra'];
@@ -33,6 +34,8 @@ export class InvoiceDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.isEditMode = !!this.data.invoice?.id; // Determina si es edición o creación
+    this.isViewMode = this.data.isViewMode || false;
+    console.log("🔍 isViewMode recibido en Dialog:", this.isViewMode);
 
     this.invoiceForm = this.fb.group({
       invoiceType: [this.data.invoice?.invoiceType || '', Validators.required],
@@ -70,6 +73,11 @@ export class InvoiceDialogComponent implements OnInit {
     });
 
     console.log("🧐 walletId recibido:", this.data.walletId);
+
+    if (this.isViewMode) {
+      this.invoiceForm.disable(); // Deshabilitar formulario en modo vista
+    }
+
 
   }
 

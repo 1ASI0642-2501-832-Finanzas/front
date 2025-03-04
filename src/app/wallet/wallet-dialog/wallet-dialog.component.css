@@ -1,35 +1,77 @@
-.invoice-dialog {
-  width: 90vw;
-  max-width: 900px;
+/* Estilos generales del modal */
+.dialog-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: rgb(133, 204, 106);
+  margin-bottom: 16px;
 }
 
-.form-row {
+/* Contenedor del formulario */
+.dialog-content {
   display: flex;
+  flex-direction: column;
   gap: 16px;
-  flex-wrap: wrap;
-  align-items: center;
+  padding: 16px;
 }
 
-.form-row mat-form-field {
-  flex: 1;
-  min-width: 280px;
+/* Agrupación de los campos */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* Asegura que todos los inputs tengan el mismo tamaño */
-mat-form-field {
+/* Asegura que los campos de texto ocupen el ancho completo */
+.full-width {
   width: 100%;
 }
 
-/* Alineación de los botones */
+/* Botones de acción */
 .dialog-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  margin-top: 20px;
-}
-mat-dialog-actions {
-  display: flex;
-  justify-content: flex-end;
   padding: 16px;
+  border-top: 1px solid #ddd;
   margin-top: 12px;
+}
+
+/* Botón Cancelar */
+.cancel-button {
+  color: #666;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-button:hover {
+  color: rgb(133, 204, 106);
+  transform: scale(1.05);
+}
+
+/* Botón Guardar */
+.save-button {
+  background-color: rgb(133, 204, 106);
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.save-button:hover {
+  background-color: rgb(110, 180, 90);
+  transform: scale(1.05);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .form-group {
+    flex-direction: column;
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+    align-items: center;
+  }
 }

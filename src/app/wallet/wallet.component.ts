@@ -56,19 +56,34 @@ export class WalletComponent {
     });
   }
 
-  openWalletDialog(): void {
+  openWalletDialog(wallet?: Wallet): void {
     const dialogRef = this.dialog.open(WalletDialogComponent, {
-      width: '400px',
+      width: '420px',
       disableClose: true,
-      data: {} // Enviamos un objeto vacío porque es una nueva cartera
+      data: wallet ? { ...wallet } : {} // Si es edición, pasamos los datos de la wallet
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.saveWallet(result); // Guardar la cartera cuando el modal se cierre
+        if (wallet?.id) { // Verificamos que wallet y su ID existan
+          this.updateWallet(wallet.id, result);
+        } else {
+          this.saveWallet(result);
+        }
       }
     });
   }
+
+  private updateWallet(walletId: number, updatedWallet: Wallet): void {
+    this.walletService.updateWallet(walletId, updatedWallet).subscribe({
+      next: () => {
+        console.log(`✅ Cartera con ID ${walletId} actualizada correctamente`);
+        this.getWallets(); // Volvemos a cargar la lista de wallets
+      },
+      error: (err) => console.error('❌ Error al actualizar la cartera:', err)
+    });
+  }
+
 
   private saveWallet(wallet: Wallet): void {
     const userIdentifier = this.authService.getUserIdentifier();

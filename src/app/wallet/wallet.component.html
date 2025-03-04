@@ -1,8 +1,11 @@
 <div class="wallet-container">
   <mat-card class="wallet-card">
+    <!-- ENCABEZADO CON BOTÓN AGREGAR -->
     <div class="wallet-header">
-      <h2>Carteras</h2>
-      <button mat-raised-button color="primary" (click)="openWalletDialog()">Agregar</button>
+      <h2 class="title-centered">Carteras</h2>
+      <button mat-icon-button class="add-button" (click)="openWalletDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
 
     <mat-table [dataSource]="wallets" class="wallet-table">
@@ -27,25 +30,27 @@
       <!-- Columna: TCEA -->
       <ng-container matColumnDef="tcea">
         <mat-header-cell *matHeaderCellDef> TCEA </mat-header-cell>
-        <mat-cell *matCellDef="let wallet"> {{ wallet.tcea }} </mat-cell>
+        <mat-cell *matCellDef="let wallet"> {{ wallet.tcea }}  % </mat-cell>
       </ng-container>
 
       <!-- Columna: Acciones -->
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-        <mat-cell *matCellDef="let wallet">
-          <button mat-icon-button color="primary" (click)="goToInvoice(wallet.id)">
+        <mat-cell *matCellDef="let wallet" class="action-buttons">
+          <button mat-icon-button class="action-view" (click)="goToInvoice(wallet.id)">
             <mat-icon>visibility</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="deleteWallet(wallet.id)">
+          <button mat-icon-button class="action-edit" (click)="openWalletDialog(wallet)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="action-delete" (click)="deleteWallet(wallet.id)">
             <mat-icon>delete</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Descargar PDF" (click)="downloadReport(wallet.id)">
+          <button mat-icon-button class="action-pdf" matTooltip="Descargar PDF" (click)="downloadReport(wallet.id)">
             <mat-icon>picture_as_pdf</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
-
 
       <mat-header-row *matHeaderRowDef="['name', 'description', 'discountDate', 'tcea', 'actions']"></mat-header-row>
       <mat-row *matRowDef="let row; columns: ['name', 'description', 'discountDate', 'tcea', 'actions'];"></mat-row>
