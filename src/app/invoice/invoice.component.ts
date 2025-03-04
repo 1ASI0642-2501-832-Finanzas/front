@@ -55,7 +55,8 @@ export class InvoiceComponent implements OnInit {
 
   openInvoiceDialog(invoice?: Invoice): void {
     const dialogRef = this.dialog.open(InvoiceDialogComponent, {
-      width: '600px',
+      width: '60vw',
+      maxWidth: 'none',
       disableClose: true,
       data: { invoice: invoice || {}, walletId: this.walletId } // Pasamos walletId para asociar la factura
     });
@@ -69,7 +70,8 @@ export class InvoiceComponent implements OnInit {
 
   viewInvoice(invoice: Invoice): void {
     this.dialog.open(InvoiceDialogComponent, {
-      width: '600px',
+      width: '60vw',
+      maxWidth: 'none',
       disableClose: false,
       data: { invoice, isViewMode: true } // Modo solo lectura
     });

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Wallet } from '../models/wallet';
 import { environment } from '../../environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +15,10 @@ export class WalletService {
 
   getWallets(userIdentifier: string): Observable<Wallet[]> {
     return this.http.get<Wallet[]>(`${this.apiUrl}/wallet/users/${userIdentifier}`);
+  }
+
+  updateWallet(walletId: number, wallet: any): Observable<Wallet> {
+    return this.http.put<Wallet>(`${this.apiUrl}/wallet/${walletId}`, wallet);
   }
 
   getWalletById(id: number): Observable<Wallet> {

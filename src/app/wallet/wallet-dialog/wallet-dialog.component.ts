@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -8,34 +8,37 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   standalone: false,
   styleUrls: ['./wallet-dialog.component.css']
 })
-export class WalletDialogComponent {
-  walletForm: FormGroup;
+export class WalletDialogComponent implements OnInit {
+  walletForm!: FormGroup;
+  isEditMode: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<WalletDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    this.isEditMode = !!this.data?.id; // Si tiene ID, es edición
+
     this.walletForm = this.fb.group({
-      name: [data?.name || '', Validators.required],
-      description: [data?.description || '', Validators.required],
-      discountDate: [data?.discountDate ? new Date(data.discountDate) : null, Validators.required]
+      name: [this.data?.name || '', Validators.required],
+      description: [this.data?.description || '', Validators.required],
+      discountDate: [this.data?.discountDate ? new Date(this.data.discountDate) : null, Validators.required]
     });
   }
 
   onSave(): void {
     if (this.walletForm.valid) {
       const selectedDate = this.walletForm.value.discountDate;
-
-      const formattedDate = selectedDate ? new Date(selectedDate).toISOString() : null; // 🔹 Formato ISO 8601
+      const formattedDate = selectedDate ? new Date(selectedDate).toISOString() : null;
 
       const walletData = {
         ...this.walletForm.value,
         discountDate: formattedDate
       };
 
-      console.log('📤 Datos enviados al backend:', walletData);
-
+      console.log('📤 Datos enviados:', walletData);
       this.dialogRef.close(walletData);
     }
   }
