@@ -1,23 +1,191 @@
+/* Contenedor de la tabla */
 .invoice-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Asegura que el contenido comience arriba */
+  align-items: flex-start;
   padding: 20px;
 }
 
+/* Tarjeta principal */
 .invoice-card {
-  max-width: 1200px; /* Aumenta el ancho de la tarjeta */
+  max-width: 1200px;
   width: 100%;
-  padding: 20px;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* ENCABEZADO */
 .invoice-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 8px;
   margin-bottom: 20px;
 }
 
+/* Centrar el título */
+.title-centered {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: rgb(41, 41, 41);
+}
+
+/* BOTÓN ATRÁS */
+.back-button {
+  color: #333;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  color: rgb(133, 204, 106);
+  transform: scale(1.1);
+}
+
+/* BOTÓN AGREGAR */
+.add-button {
+  background-color: rgb(133, 204, 106);
+  color: white;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: rgb(110, 180, 90);
+  transform: scale(1.1);
+}
+
+/* TABLA */
 .invoice-table {
   width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado */
+.mat-header-row {
+  background-color: rgb(133, 204, 106);
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  font-size: 18px;
+}
+
+/* Filas de la tabla */
+.mat-row {
+  transition: background-color 0.2s ease;
+  height: 72px; /* 🔹 Aumenta la altura de cada fila */
+  border-bottom: 10px solid transparent; /* 🔹 Agrega espacio entre filas */
+}
+
+.mat-row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.mat-row:hover {
+  background-color: #f1f8f5;
+}
+
+/* Celdas */
+.mat-cell {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px; /* 🔹 Letra más grande */
+}
+
+/* ESTILOS PARA EL ESTADO */
+.status-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.status-label .status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Estados visuales */
+.status-in-progress {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #ff9800;
+}
+
+.status-in-progress .status-dot {
+  background-color: #ff9800;
+}
+
+.status-completed {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.status-completed .status-dot {
+  background-color: #4caf50;
+}
+
+/* ACCIONES */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.mat-icon-button {
+  transition: transform 0.2s ease;
+}
+
+.mat-icon-button:hover {
+  transform: scale(1.2);
+}
+
+/* Íconos */
+.action-view {
+  color: #333;
+}
+
+.action-edit {
+  color: #4caf50;
+}
+
+.action-delete {
+  color: #f44336;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .invoice-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
 }
