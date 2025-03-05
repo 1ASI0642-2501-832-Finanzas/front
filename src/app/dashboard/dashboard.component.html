@@ -1,1 +1,75 @@
-<p>dashboard works!</p>
+<mat-card class="dashboard-card">
+    <mat-card-header>
+        <mat-card-title>👤 Usuario</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p><strong>Nombre:</strong> {{ user.username }}</p>
+        <p><strong>Correo:</strong> {{ user.email }}</p>
+    </mat-card-content>
+</mat-card>
+
+<mat-grid-list cols="2" rowHeight="300px" class="dashboard-grid">
+    <!-- 💼 Sección de carteras -->
+    <mat-grid-tile>
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+                <mat-card-title>💼 Cartera</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p><strong>Total:</strong> {{ totalWallets }}</p>
+                <p><strong>Vencidas:</strong> {{ expiredWallets }}</p>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+    <!-- 📊 Gráfico de Facturas -->
+    <mat-grid-tile>
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+                <mat-card-title>📊 Facturas</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <canvas
+                        baseChart
+                        [data]="pieChartData"
+                        [options]="pieChartOptions"
+                        [type]="pieChartType">
+                </canvas>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<!-- 📄 Sección de facturas pendientes -->
+<mat-card class="dashboard-card">
+    <mat-card-header>
+        <mat-card-title>📄 Facturas Pendientes</mat-card-title>
+        <button mat-button (click)="filterPending()">🔍 Filtrar Pendientes</button>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table [dataSource]="pendingInvoices" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Empresa </mat-header-cell>
+                <mat-cell *matCellDef="let invoice"> {{ invoice.issuerName }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                <mat-cell *matCellDef="let invoice"> {{ invoice.status }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dueDate">
+                <mat-header-cell *matHeaderCellDef> Vence </mat-header-cell>
+                <mat-cell *matCellDef="let invoice"> {{ invoice.dueDate | date }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="wallet">
+                <mat-header-cell *matHeaderCellDef> Cartera </mat-header-cell>
+                <mat-cell *matCellDef="let invoice"> {{ invoice.walletId }} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['name', 'status', 'dueDate', 'wallet']"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: ['name', 'status', 'dueDate', 'wallet'];"></mat-row>
+        </table>
+    </mat-card-content>
+</mat-card>

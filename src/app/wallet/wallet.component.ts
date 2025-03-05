@@ -103,17 +103,33 @@ export class WalletComponent {
     });
   }
 
-  goToInvoice(walletId: number): void {
-    this.router.navigate([`wallet/${walletId}/invoice`])
+  //NUEVO
+
+  goToInvoice(wallet: Wallet): void {
+    console.log("🔎 Wallet recibido:", wallet);
+
+    if (!wallet || !wallet.id) {
+      console.error("❌ Error: wallet.id es undefined o inválido");
+      return;
+    }
+
+    if (!wallet.discountDate) {
+      console.warn("⚠️ Advertencia: wallet.discountDate está vacío o undefined");
+    }
+
+    this.router.navigate([`wallet/${wallet.id}/invoice`], {
+      queryParams: { discountDate: wallet.discountDate }
+    })
       .then(success => {
         if (success) {
-          console.log(`Navegación exitosa a wallet/${walletId}/invoice`);
+          console.log(`✅ Navegación exitosa a wallet/${wallet.id}/invoice con fecha de descuento: ${wallet.discountDate}`);
         } else {
-          console.error(`Error al navegar a wallet/${walletId}/invoice`);
+          console.error(`❌ Error al navegar a wallet/${wallet.id}/invoice`);
         }
       })
-      .catch(error => console.error('Error de navegacion:', error));
+      .catch(error => console.error('Error de navegación:', error));
   }
+
 
   downloadReport(walletId: number): void {
     this.walletService.generateWalletReport(walletId).subscribe({

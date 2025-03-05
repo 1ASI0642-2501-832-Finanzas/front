@@ -41,7 +41,7 @@ export class InvoiceDialogComponent implements OnInit {
     private fb: FormBuilder,
     private invoiceService: InvoiceService,
     private dialogRef: MatDialogRef<InvoiceDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { invoice: Invoice, isViewMode: boolean, walletId: number }
+    @Inject(MAT_DIALOG_DATA) public data: { invoice: Invoice, isViewMode: boolean, walletId: number, discountDate: string }
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +60,8 @@ export class InvoiceDialogComponent implements OnInit {
       amount: [this.data.invoice?.amount || 0, [Validators.required, Validators.min(0)]],
       emissionDate: [this.parseDate(this.data.invoice?.emissionDate), Validators.required],
       dueDate: [this.parseDate(this.data.invoice?.dueDate), Validators.required],
-      discountDate: [this.parseDate(this.data.invoice?.discountDate), Validators.required],
+      discountDate: [{ value: this.parseDate(this.data.discountDate), disabled: true }, Validators.required], //
+
       terms: [this.data.invoice?.terms || '', Validators.required],
 
       rateType: ['Tasa Efectiva', Validators.required],
@@ -117,18 +118,28 @@ export class InvoiceDialogComponent implements OnInit {
 
 
 
-  private parseDate(dateString?: string): Date | null {
+  private parseDate(dateString?: string | Date): Date | null {
     if (!dateString) return null;
 
-    const parts = dateString.split('-');
-    if (parts.length !== 3) return null;
+    // Si ya es un objeto Date válido, lo devolvemos directamente
+    if (dateString instanceof Date && !isNaN(dateString.getTime())) {
+      return dateString;
+    }
 
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1;
-    const year = parseInt(parts[2], 10);
+    // Si la fecha ya está en formato YYYY-MM-DD, la convertimos a Date
+    if (typeof dateString === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+      return new Date(dateString);
+    }
 
-    return new Date(year, month, day);
+    // Si viene en formato DD-MM-YYYY, la convertimos correctamente
+    if (typeof dateString === 'string' && /^\d{2}-\d{2}-\d{4}$/.test(dateString)) {
+      const [day, month, year] = dateString.split('-').map(Number);
+      return new Date(year, month - 1, day); // ⚠️ Restamos 1 al mes porque en JS los meses van de 0 a 11
+    }
+
+    return null;
   }
+
 
 
   private formatDate(date: Date): string {
@@ -208,16 +219,21 @@ export class InvoiceDialogComponent implements OnInit {
     delete invoiceData.capitalizationDays;
     delete invoiceData.tcea;
 
+    // 🔹 Convertimos Date a string "DD-MM-YYYY" antes de enviarlo al backend
     invoiceData.emissionDate = this.formatDate(invoiceData.emissionDate);
     invoiceData.dueDate = this.formatDate(invoiceData.dueDate);
     invoiceData.discountDate = this.formatDate(invoiceData.discountDate);
 
     console.log("📤 Enviando datos:", JSON.stringify(invoiceData, null, 2));
 
-    (this.data.invoice?.id ? this.invoiceService.updateInvoice(this.data.invoice.id, invoiceData) : this.invoiceService.createInvoice(invoiceData))
+    (this.data.invoice?.id
+      ? this.invoiceService.updateInvoice(this.data.invoice.id, invoiceData)
+      : this.invoiceService.createInvoice(invoiceData))
       .subscribe(response => {
         console.log('✅ Operación exitosa:', response);
         this.dialogRef.close(true);
       }, error => console.error('❌ Error en operación:', error));
   }
+
+
 }
