@@ -1,0 +1,25 @@
+.dashboard-card {
+  margin: 20px;
+  padding: 15px;
+}
+
+.dashboard-grid {
+  margin: 20px;
+}
+
+.mat-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-header-cell, .mat-cell {
+  padding: 8px;
+}
+
+button {
+  margin-left: auto;
+}

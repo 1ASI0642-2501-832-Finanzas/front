@@ -6,7 +6,6 @@ import { AuthModule } from './auth/auth.module';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { DashboardModule } from './dashboard/dashboard.module';
 
 import {
   ButtonDirective,
@@ -23,7 +22,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import {WalletComponent} from './wallet/wallet.component';
 import {WalletDialogComponent} from './wallet/wallet-dialog/wallet-dialog.component';
 import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatDatepicker,
   MatDatepickerInput,
@@ -31,9 +30,9 @@ import {
   MatDatepickerToggle
 } from '@angular/material/datepicker';
 import {MatFormField, MatInput, MatInputModule, MatSuffix} from '@angular/material/input';
-import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatButton, MatButtonModule, MatIconButton} from '@angular/material/button';
 import {MatDialogActions, MatDialogContent, MatDialogModule, MatDialogTitle} from '@angular/material/dialog';
-import {MatCard, MatCardTitle} from '@angular/material/card';
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
 import {
   MatCell,
   MatCellDef,
@@ -41,7 +40,7 @@ import {
   MatHeaderCell,
   MatHeaderCellDef,
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
-  MatTable
+  MatTable, MatTableModule
 } from '@angular/material/table';
 import {MatIcon} from '@angular/material/icon';
 import {MAT_DATE_LOCALE, MatNativeDateModule, MatOption} from '@angular/material/core';
@@ -52,6 +51,12 @@ import { InvoiceDialogComponent } from './invoice/invoice-dialog/invoice-dialog.
 import {MatSelect} from '@angular/material/select';
 import {MatAccordion, MatExpansionPanel, MatExpansionPanelTitle} from '@angular/material/expansion';
 import {MatTooltip} from '@angular/material/tooltip';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {MatList, MatListItem} from '@angular/material/list';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatGridList, MatGridTile} from '@angular/material/grid-list';
+import {BaseChartDirective} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -63,13 +68,13 @@ import {MatTooltip} from '@angular/material/tooltip';
     WalletDialogComponent,
     HomeComponent,
     InvoiceComponent,
-    InvoiceDialogComponent
+    InvoiceDialogComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    DashboardModule,
     FooterModule,
     HeaderModule,
     CommonModule,
@@ -117,7 +122,19 @@ import {MatTooltip} from '@angular/material/tooltip';
     MatExpansionPanel,
     MatExpansionPanelTitle,
     MatAccordion,
-    MatTooltip
+    MatTooltip,
+    MatListItem,
+    MatList,
+    FormsModule,
+    MatCardContent,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatGridList,
+    MatGridTile,
+    MatCardHeader,
+    BaseChartDirective
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
