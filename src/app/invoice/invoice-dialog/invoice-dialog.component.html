@@ -140,12 +140,14 @@
         <div class="column-block">
           <h5 class="section-title">Datos del Descuento:</h5>
           <div class="form-grid">
+
             <mat-form-field appearance="outline">
               <mat-label>Fecha de Descuento</mat-label>
-              <input matInput formControlName="discountDate" [matDatepicker]="picker3">
+              <input matInput formControlName="discountDate" [matDatepicker]="picker3" >
               <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
               <mat-datepicker #picker3></mat-datepicker>
             </mat-form-field>
+
 
             <mat-form-field appearance="outline">
               <mat-label>Tipo de Tasa</mat-label>
@@ -153,6 +155,8 @@
                 <mat-option *ngFor="let type of rateTypes" [value]="type">{{ type }}</mat-option>
               </mat-select>
             </mat-form-field>
+
+
 
             <mat-form-field appearance="outline" *ngIf="invoiceForm.get('rateType')?.value === 'Tasa Nominal'">
               <mat-label>Tasa Nominal (%)</mat-label>

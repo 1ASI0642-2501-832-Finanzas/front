@@ -37,7 +37,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
         <mat-cell *matCellDef="let wallet" class="action-buttons">
-          <button mat-icon-button class="action-view" (click)="goToInvoice(wallet.id)">
+          <button mat-icon-button class="action-view" (click)="goToInvoice(wallet)">
             <mat-icon>visibility</mat-icon>
           </button>
           <button mat-icon-button class="action-edit" (click)="openWalletDialog(wallet)">
