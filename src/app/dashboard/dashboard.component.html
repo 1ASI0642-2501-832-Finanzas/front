@@ -1,75 +1,125 @@
-<mat-card class="dashboard-card">
-    <mat-card-header>
-        <mat-card-title>👤 Usuario</mat-card-title>
-    </mat-card-header>
+<div class="dashboard-container">
+
+  <mat-card class="user-card" >
     <mat-card-content>
-        <p><strong>Nombre:</strong> {{ user.username }}</p>
-        <p><strong>Correo:</strong> {{ user.email }}</p>
+      <div class="user-header">
+        <!-- Información del usuario -->
+        <div class="user-info">
+          <div class="user-avatar">
+            <mat-icon class="mat-icon-large">account_circle</mat-icon>
+
+          </div>
+          <div class="user-details">
+            <h2>{{ getGreeting() }}, <span class="username-highlight">{{ user.username }}</span>! 👋</h2>
+            <p class="user-email">
+              <mat-icon class="email-icon">mail</mat-icon> Correo: {{ user.email }}
+            </p>
+          </div>
+        </div>
+
+        <div id="wallet-selection-card" class="wallet-selection-card">
+          <mat-card class="wallet-card">
+            <mat-card-content>
+              <mat-form-field appearance="outline" class="wallet-dropdown">
+                <mat-label>Selecciona una cartera</mat-label>
+                <mat-select [(ngModel)]="selectedWalletId" (selectionChange)="onWalletChange($event.value)">
+                  <mat-option *ngFor="let wallet of wallets" [value]="wallet.id">
+                    {{ wallet.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
     </mat-card-content>
+  </mat-card>
+
+
+  <!-- Segunda fila: gráficos -->
+  <div class="dashboard-row">
+    <!-- Gráfico circular (Estados) -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>📊 Estados de Facturación</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="progress-container">
+          <canvas id="statusChart"></canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Gráfico Evolución TCEA -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>📈 Evolución de TCEA</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas id="tceaChart"></canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Facturas pendientes -->
+  <mat-card class="dashboard-card">
+    <mat-card-header class="invoice-header">
+      <mat-card-title class="title-centered">📄 Facturas Pendientes</mat-card-title>
+      <button mat-icon-button class="documents-button" (click)="goToAllDocuments()">
+        <mat-icon>folder</mat-icon>
+      </button>
+    </mat-card-header>
+
+
+  <mat-card-content>
+    <mat-table [dataSource]="pendingInvoices" class="mat-elevation-z8 invoice-table">
+      <ng-container matColumnDef="issuerName">
+        <mat-header-cell *matHeaderCellDef> Empresa </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{ invoice.issuerName }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="financialInstitutionName">
+        <mat-header-cell *matHeaderCellDef> Institución Financiera </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{ invoice.financialInstitutionName }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="currency">
+        <mat-header-cell *matHeaderCellDef> Moneda </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{ invoice.currency }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef> Monto </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{ invoice.amount | number:'1.2-2' }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dueDate">
+        <mat-header-cell *matHeaderCellDef> Vence </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{ invoice.dueDate }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tcea">
+        <mat-header-cell *matHeaderCellDef> TCEA (%) </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{ invoice.tcea }} % </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell *matCellDef="let invoice" class="actions-cell">
+          <div class="icon-actions">
+            <!-- Ver detalles de la factura -->
+            <button mat-icon-button class="action-view" (click)="viewInvoice(invoice)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['issuerName', 'financialInstitutionName', 'currency', 'amount', 'dueDate', 'tcea', 'actions']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['issuerName', 'financialInstitutionName', 'currency', 'amount', 'dueDate', 'tcea', 'actions'];"></mat-row>
+    </mat-table>
+  </mat-card-content>
 </mat-card>
 
-<mat-grid-list cols="2" rowHeight="300px" class="dashboard-grid">
-    <!-- 💼 Sección de carteras -->
-    <mat-grid-tile>
-        <mat-card class="dashboard-card">
-            <mat-card-header>
-                <mat-card-title>💼 Cartera</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <p><strong>Total:</strong> {{ totalWallets }}</p>
-                <p><strong>Vencidas:</strong> {{ expiredWallets }}</p>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-
-    <!-- 📊 Gráfico de Facturas -->
-    <mat-grid-tile>
-        <mat-card class="dashboard-card">
-            <mat-card-header>
-                <mat-card-title>📊 Facturas</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <canvas
-                        baseChart
-                        [data]="pieChartData"
-                        [options]="pieChartOptions"
-                        [type]="pieChartType">
-                </canvas>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
-
-<!-- 📄 Sección de facturas pendientes -->
-<mat-card class="dashboard-card">
-    <mat-card-header>
-        <mat-card-title>📄 Facturas Pendientes</mat-card-title>
-        <button mat-button (click)="filterPending()">🔍 Filtrar Pendientes</button>
-    </mat-card-header>
-    <mat-card-content>
-        <table mat-table [dataSource]="pendingInvoices" class="mat-elevation-z8">
-            <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef> Empresa </mat-header-cell>
-                <mat-cell *matCellDef="let invoice"> {{ invoice.issuerName }} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="status">
-                <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
-                <mat-cell *matCellDef="let invoice"> {{ invoice.status }} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="dueDate">
-                <mat-header-cell *matHeaderCellDef> Vence </mat-header-cell>
-                <mat-cell *matCellDef="let invoice"> {{ invoice.dueDate | date }} </mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="wallet">
-                <mat-header-cell *matHeaderCellDef> Cartera </mat-header-cell>
-                <mat-cell *matCellDef="let invoice"> {{ invoice.walletId }} </mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="['name', 'status', 'dueDate', 'wallet']"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: ['name', 'status', 'dueDate', 'wallet'];"></mat-row>
-        </table>
-    </mat-card-content>
-</mat-card>
+</div>
