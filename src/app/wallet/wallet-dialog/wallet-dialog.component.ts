@@ -29,19 +29,19 @@ export class WalletDialogComponent implements OnInit {
     });
   }
 
-    // ✅ Convierte una fecha en formato "DD-MM-YYYY" a un objeto Date
-    private parseDate(dateString?: string): Date | null {
-      if (!dateString) return null;
+  // ✅ Convierte una fecha en formato "DD-MM-YYYY" a un objeto Date
+  private parseDate(dateString?: string): Date | null {
+    if (!dateString) return null;
 
-      const parts = dateString.split('-'); // Divide en [DD, MM, YYYY]
-      if (parts.length !== 3) return null;
+    const parts = dateString.split('-'); // Divide en [DD, MM, YYYY]
+    if (parts.length !== 3) return null;
 
-      const day = parseInt(parts[0], 10);
-      const month = parseInt(parts[1], 10) - 1; // Los meses en JS empiezan desde 0
-      const year = parseInt(parts[2], 10);
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // Los meses en JS empiezan desde 0
+    const year = parseInt(parts[2], 10);
 
-      return new Date(year, month, day);
-    }
+    return new Date(year, month, day);
+  }
 
 
   // ✅ Método para convertir la fecha en formato DD-MM-YYYY

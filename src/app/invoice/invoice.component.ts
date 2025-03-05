@@ -15,6 +15,9 @@ export class InvoiceComponent implements OnInit {
   invoices: Invoice[] = [];
   walletId!: number; // ID de la wallet actual
 
+
+  discountDate!: string;
+
   constructor(
     private invoiceService: InvoiceService,
     private route: ActivatedRoute,
@@ -28,8 +31,16 @@ export class InvoiceComponent implements OnInit {
         console.error('No se encontró un walletId válido en la URL');
         return;
       }
+
+      // 🔹 Capturamos `discountDate` desde `queryParams`
+      this.route.queryParams.subscribe(queryParams => {
+        this.discountDate = queryParams['discountDate'] || '';
+        console.log("📅 Fecha de Descuento recibida:", this.discountDate);
+      });
+
       this.walletId = id;
       this.getInvoices();
+
     });
   }
 
@@ -58,7 +69,7 @@ export class InvoiceComponent implements OnInit {
       width: '60vw',
       maxWidth: 'none',
       disableClose: true,
-      data: { invoice: invoice || {}, walletId: this.walletId } // Pasamos walletId para asociar la factura
+      data: { invoice: invoice || {}, walletId: this.walletId , discountDate: this.discountDate } // Pasamos walletId para asociar la factura
     });
 
     dialogRef.afterClosed().subscribe(result => {
