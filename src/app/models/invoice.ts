@@ -8,13 +8,12 @@ export interface Invoice {
   issuerRuc: string;
   currency: string;
   amount: number;
-  igv: number;
   emissionDate: string;
   dueDate: string;
   discountDate: string;
   terms: string;
-  nominalRate: number;
   effectiveRate: number;
+  tepDays: number;
   initialCosts: Cost[];
   finalCosts: Cost[];
   status: string;
@@ -29,6 +28,8 @@ export interface Cost {
   value: number;
   type: string;
 }
+
+
 
 export interface Wallet {
   id: number;
